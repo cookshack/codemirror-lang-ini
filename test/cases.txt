@@ -1,0 +1,80 @@
+# empty
+
+
+
+==>
+Ini
+
+# Header
+
+[x]
+
+==>
+Ini(Header)
+
+# Header x2
+
+[x]
+[x]
+
+==>
+Ini(Header,
+    Header)
+
+# Entry
+
+a=b
+
+==>
+Ini(Entry(Key, Value))
+
+# group
+
+[g]
+a=b
+entry2   =1.03
+
+==>
+Ini(Header,
+    Entry(Key, Value),
+    Entry(Key, Value))
+
+# group x2
+
+[g]
+a=b
+entry2   =1.03
+
+[longer name with space]
+name=! go to town [] //
+
+==>
+Ini(Header,
+    Entry(Key, Value),
+    Entry(Key, Value),
+    Header,
+    Entry(Key, Value))
+
+# space in Key
+
+key with space=val
+
+==>
+Ini(Entry(Key, Value))
+
+# comment
+
+# hi
+
+==>
+Ini(Comment)
+
+# comment xN
+
+# hi
+
+# hi2
+# a longer comment
+
+==>
+Ini(Comment, Comment, Comment)

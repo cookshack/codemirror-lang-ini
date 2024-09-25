@@ -1,0 +1,47 @@
+@detectDelim
+@precedence {
+}
+
+//// Root.
+
+@top Ini { (line nl)* line (nl | eof) }
+
+line { Comment | Header | Entry | emptyLine }
+
+Comment { '#' commentChar+ }
+
+Header { '[' headerChar* ']' }
+
+Entry { Key '=' Value }
+
+emptyLine {}
+
+headerChar { char | space | '=' }
+
+Key { (char | space)* } // .desktop: A-Za-z0-9-
+
+Value { valueChar* }
+
+valueChar { (headerChar | '[' | ']') }
+
+commentChar { valueChar | '#' }
+
+//// Tokens.
+
+//@skip { Comment }
+
+@tokens {
+  char { ![\[\]= \t\r\n#] }
+  space { $[ \t]+ }
+  nl { '\r'? '\n' }
+  eof { @eof }
+
+  // literal tokens
+  '[' ']' '='
+
+  @precedence {}
+}
+
+//// Highlight.
+
+@external propSource highlighting from "./highlight"
