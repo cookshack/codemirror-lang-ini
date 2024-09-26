@@ -22,6 +22,7 @@
   "sideEffects": false,
   "dependencies": {
     "@codemirror/language": "^6.0.0",
+    "@cookshack/codemirror-lang-lezer-tree": "file:../codemirror-lang-lezer-tree",
     "@lezer/highlight": "^1.0.0",
     "@lezer/lr": "^1.0.0"
   },

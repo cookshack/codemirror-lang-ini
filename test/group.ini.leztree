@@ -1,0 +1,3 @@
+Ini(Group(Header([,]),
+          Entry(Key, =, Value),
+          Entry(Key, =, Value)))

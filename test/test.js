@@ -1,6 +1,7 @@
 import { lr } from "../dist/index.js"
 import { fileTests } from "@lezer/generator/dist/test"
 import * as LZGen from "@lezer/generator"
+import { pretty } from "@cookshack/codemirror-lang-lezer-tree"
 
 import * as fs from "fs"
 import * as path from "path"
@@ -27,10 +28,43 @@ function testAll() {
   }
 }
 
+function canon
+(str) {
+  return str.replace(/\s+/g, '')
+}
+
+function testFiles
+(testName, parser, ext) {
+  function isInput
+  (file) {
+    return file.endsWith('.' + ext) && ((file.match(/\./g) || []).length == 1)
+  }
+
+  globalThis.describe(testName, () => {
+    for (let file of fs.readdirSync(caseDir))
+      if (isInput(file)) {
+        let content, name
+
+        content = fs.readFileSync(path.join(caseDir, file), 'utf8')
+        name = /^[^\.]*/.exec(file)[0]
+        globalThis.it(name, () => {
+          let tree, expected
+
+          expected = fs.readFileSync(path.join(caseDir, name + '.' + ext + '.leztree'), 'utf8')?.trim()
+          tree = parser.parse(content)
+          //console.log(pretty(tree.topNode))
+          assert.equal(canon(pretty(tree.topNode)), canon(expected))
+        })
+      }
+  })
+}
+
 //console.log(process.argv)
 //console.log('single: ' + process.env.npm_config_singletest)
 
 if (process.env.npm_config_singletest)
   test1(process.env.npm_config_singletest + '.txt')
-else
+else {
   testAll()
+  testFiles('INI', lr.parser, 'ini')
+}
