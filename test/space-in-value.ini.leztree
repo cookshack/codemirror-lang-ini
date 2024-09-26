@@ -1,2 +1,2 @@
-Ini(Entry(Key, Value),
-    Entry(Key, Value))
+Ini(Entry(Key, Eq, Value),
+    Entry(Key, Eq, Value))

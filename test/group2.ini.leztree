@@ -1,5 +1,5 @@
 Ini(Group(Header,
-          Entry(Key, Value),
-          Entry(Key, Value)),
+          Entry(Key, Eq, Value),
+          Entry(Key, Eq, Value)),
     Group(Header,
-          Entry(Key, Value)))
+          Entry(Key, Eq, Value)))
