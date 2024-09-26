@@ -62,6 +62,15 @@ key with space=val
 ==>
 Ini(Entry(Key, Value))
 
+# space in Value
+
+key=val with space
+key=val with space
+
+==>
+Ini(Entry(Key, Value),
+    Entry(Key, Value))
+
 # comment
 
 # hi
