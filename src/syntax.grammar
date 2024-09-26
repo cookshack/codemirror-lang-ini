@@ -38,9 +38,6 @@ commentChar { valueChar | '#' }
   nl { '\r'? '\n' }
   eof { @eof }
 
-  // literal tokens
-  '[' ']' '='
-
   @precedence {}
 }
 
