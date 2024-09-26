@@ -10,7 +10,7 @@ Ini
 [x]
 
 ==>
-Ini(Header)
+Ini(Group(Header))
 
 # Header x2
 
@@ -18,8 +18,8 @@ Ini(Header)
 [x]
 
 ==>
-Ini(Header,
-    Header)
+Ini(Group(Header),
+    Group(Header))
 
 # Entry
 
@@ -35,9 +35,9 @@ a=b
 entry2   =1.03
 
 ==>
-Ini(Header,
-    Entry(Key, Value),
-    Entry(Key, Value))
+Ini(Group(Header,
+          Entry(Key, Value),
+          Entry(Key, Value)))
 
 # group x2
 
@@ -49,11 +49,11 @@ entry2   =1.03
 name=! go to town [] //
 
 ==>
-Ini(Header,
-    Entry(Key, Value),
-    Entry(Key, Value),
-    Header,
-    Entry(Key, Value))
+Ini(Group(Header,
+          Entry(Key, Value),
+          Entry(Key, Value)),
+    Group(Header,
+          Entry(Key, Value)))
 
 # space in Key
 
