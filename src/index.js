@@ -1,27 +1,19 @@
 import * as Grammar from './syntax.grammar'
-import { LRLanguage, LanguageSupport, foldNodeProp, foldInside } from '@codemirror/language'
+import { LRLanguage, LanguageSupport, foldNodeProp } from '@codemirror/language'
 
 let props, data, parser
 
-function foldDef
+function foldGroup
 (tree) {
-  let ident, arrow
+  let header, end
 
-  ident = tree.firstChild
-  arrow = ident?.nextSibling
-  return arrow ? { from: arrow.to, to: tree.to } : null
+  header = tree.firstChild
+  // need this otherwise fold includes trailing nl
+  end = tree.lastChild
+  return header ? { from: header.to, to: end.to } : null
 }
 
-function foldAction
-(tree) {
-  if ((tree.to - tree.from) > 1)
-    return { from: tree.from + 1, to: tree.to - 1 }
-  return null
-}
-
-props = [ foldNodeProp.add({ 'Group': foldInside,
-                             Def: foldDef,
-                             Action: foldAction }) ]
+props = [ foldNodeProp.add({ 'Group': foldGroup }) ]
 
 data = { commentTokens: { line: '#' },
          closeBrackets: { brackets: '[' } }
