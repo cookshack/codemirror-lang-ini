@@ -4,11 +4,9 @@
 
 //// Root.
 
-@top Ini { Group* }
+@top Ini { (line nl)* (line (nl | eof) | Group*) }
 
 Group { Header (nl | eof | nl (line nl)* line (nl | eof)) }
-
-lines { (line nl)* line }
 
 line { Comment | Entry | emptyLine }
 
